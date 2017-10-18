@@ -1,25 +1,26 @@
 @import url(http://fonts.googleapis.com/css?family=Josefin+Slab);
 
 .controls {
-  margin: 50px;
+  margin: 30px;
   text-align: center;
 }
 
 h1 {
   font-family: Josefin Slab;
-  font-size: 72px;
+  font-size: 62px;
   text-align: center;
+  margin: 5px;
 }
 
 button {
   background: #4479BA;
   color: #FFF;
   font-family: Josefin Slab;
-  font-size: 50px;
+  font-size: 40px;
   text-align: center;
   border: 1px solid black;
-  margin: 20px;
-  padding: 15px 25px;
+  margin: 5px;
+  padding: 5px 25px;
   border-radius: 10px;
   box-shadow: 2px 2px black;
 }

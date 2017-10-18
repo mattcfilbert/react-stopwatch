@@ -5,8 +5,9 @@ class Stopwatch extends Component {
   constructor () {
     super()
     this.state = {
-      time: 0,
-      go: false
+      time: 30,
+      go: false,
+      count: 1000
     }
     this.clickStart = this.clickStart.bind(this)
     this.clickPause = this.clickPause.bind(this)
@@ -19,7 +20,7 @@ class Stopwatch extends Component {
         go: setInterval(() => {
           if (this.state.go) {
             this.setState({
-              time: this.state.time + 1
+              time: this.state.time - 1
             })
           }
         }, 1000)})
@@ -38,16 +39,41 @@ class Stopwatch extends Component {
 
   clickReset () {
     this.setState({
-      time: 0
+      time: 30,
+      count: 1000
     })
+    document.getElementById("text").value = "";
     this.clickPause()
   }
+
+  handleKeyPress = (event) => {
+
+    if (!this.state.go) {
+      this.clickStart()
+    }
+
+    this.setState({
+      time: 30
+    })
+
+    var my_string = document.getElementById("text").value
+    var spaceCount = (my_string.split(" ").length - 1)
+    this.setState({
+      count: 1000 - spaceCount
+    })
+
+    if (this.state.count < 1) {
+      this.clickPause()
+    }
+
+
+}
 
   render () {
     console.log(this.state.time)
     let display = (
       <div className='stopwatch'>
-        <h1 style={{textDecoration: 'underline'}}>ZERO</h1>
+        <h1 style={{textDecoration: 'underline'}}>THIRTY SECONDS TO LIVE</h1>
         <div className='controls'>
           <button onClick={this.clickStart}>Start</button>
         </div>
@@ -57,11 +83,21 @@ class Stopwatch extends Component {
       display = (<div className='stopwatch'>
         <h1>{this.state.time}</h1>
         <div className='controls'>
-          <button onClick={this.clickReset}>Reset</button>
+
           <button onClick={this.clickStart}>Start</button>
-          <button onClick={this.clickPause}>Pause</button>
+          <button onClick={this.clickReset}>Scrap</button>
+
+          <div>
+          <h5>Words left:</h5>
+          <h4 id="count">{this.state.count}</h4>
+          <textarea rows="33" cols="170" id="text" onKeyPress={this.handleKeyPress}></textarea>
+
+        </div>
         </div>
       </div>)
+    }
+    else {
+      this.clickReset()
     }
 
     return (
