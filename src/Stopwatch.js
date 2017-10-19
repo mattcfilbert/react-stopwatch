@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import './Stopwatch.css'
 
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 class Stopwatch extends Component {
   constructor () {
     super()
     this.state = {
-      time: 30,
+      time: 10,
       go: false,
       count: 1000
     }
@@ -37,9 +39,10 @@ class Stopwatch extends Component {
     console.log('pause', this.state.go)
   }
 
+
   clickReset () {
     this.setState({
-      time: 30,
+      time: 10,
       count: 1000
     })
     document.getElementById("text").value = "";
@@ -53,7 +56,7 @@ class Stopwatch extends Component {
     }
 
     this.setState({
-      time: 30
+      time: 10
     })
 
     var my_string = document.getElementById("text").value
@@ -79,6 +82,7 @@ class Stopwatch extends Component {
         </div>
       </div>
   )
+
     if (this.state.time) {
       display = (<div className='stopwatch'>
         <h1>{this.state.time}</h1>
@@ -90,7 +94,7 @@ class Stopwatch extends Component {
           <div>
           <h5>Words left:</h5>
           <h4 id="count">{this.state.count}</h4>
-          <textarea rows="33" cols="170" id="text" onKeyPress={this.handleKeyPress}></textarea>
+          <textarea style={{ opacity: this.state.time/10 }} rows="33" cols="170" id="text" onKeyPress={this.handleKeyPress}></textarea>
 
         </div>
         </div>
@@ -105,5 +109,6 @@ class Stopwatch extends Component {
     )
   }
 }
+
 
 export default Stopwatch
